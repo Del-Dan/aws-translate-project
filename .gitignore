@@ -1,13 +1,33 @@
-# Terraform stuff
-.terraform/
+# Terraform files
 *.tfstate
 *.tfstate.*
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform directories
+.terraform/
 .terraform.lock.hcl
 
-# Python cache
+# Local environment
+*.zip
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
 # OS files
 .DS_Store
 Thumbs.db
+
+# Logs
+*.log
+
+# Ignore AWS provider binaries (too big for GitHub)
+.terraform/providers/
+
+# Personal test files (optional, keep only if needed)
+*.tmp
