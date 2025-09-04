@@ -1,0 +1,13 @@
+# Terraform stuff
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db
