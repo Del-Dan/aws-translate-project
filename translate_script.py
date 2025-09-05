@@ -59,7 +59,7 @@ def handler(event=None, context=None):
     output_key = "translated-" + file_key
     s3.upload_file(response_path, RESPONSE_BUCKET, output_key)
 
-    print(f"✅ Translation complete. File uploaded as {output_key} in {RESPONSE_BUCKET}")
+    print(f"Translation complete. File uploaded as {output_key} in {RESPONSE_BUCKET}")
 
 # Run locally
 if __name__ == "__main__":

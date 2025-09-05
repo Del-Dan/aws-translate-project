@@ -5,11 +5,13 @@ provider "aws" {
 
 # -------- S3 Buckets --------
 resource "aws_s3_bucket" "request_bucket" {
-  bucket = "danue-request-bucket-123"
+  bucket        = "danue-request-bucket-123"
+  force_destroy = true
 }
 
 resource "aws_s3_bucket" "response_bucket" {
-  bucket = "danue-response-bucket-123"
+  bucket        = "danue-response-bucket-123"
+  force_destroy = true
 }
 
 # -------- S3 Bucket Lifecycle Policy (auto delete after 30 days) --------
@@ -87,8 +89,8 @@ resource "aws_iam_policy" "translate_policy" {
         Resource = "*"
       },
       {
-        Effect   = "Allow",
-        Action   = [
+        Effect = "Allow",
+        Action = [
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
           "logs:PutLogEvents"
@@ -99,13 +101,13 @@ resource "aws_iam_policy" "translate_policy" {
   })
 }
 
-# -------- Attach Policy to Role --------
+# -------- Attaching Policy to Role --------
 resource "aws_iam_role_policy_attachment" "translate_attach" {
   role       = aws_iam_role.translate_role.name
   policy_arn = aws_iam_policy.translate_policy.arn
 }
 
-# -------- Attach AWS Managed Lambda Basic Execution Role --------
+# -------- Attaching AWS Managed Lambda Basic Execution Role --------
 resource "aws_iam_role_policy_attachment" "lambda_basic_attach" {
   role       = aws_iam_role.translate_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
@@ -141,7 +143,7 @@ resource "aws_s3_bucket_notification" "request_trigger" {
   depends_on = [aws_lambda_permission.allow_s3]
 }
 
-# -------- Allow S3 to Invoke Lambda --------
+# -------- Allowing S3 to Invoke Lambda --------
 resource "aws_lambda_permission" "allow_s3" {
   statement_id  = "AllowS3Invoke"
   action        = "lambda:InvokeFunction"
